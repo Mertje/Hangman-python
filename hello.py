@@ -8,18 +8,29 @@ def get_word():
     return random.choice(word_list).upper()
 
 def play_game(word):
-    print(word)
-    word_completion = "_" * len(word)
-    guessed = False
+    print(word) 
+    word_completion = "_" * len(word) # creates underscore for each letter in word
+    right_guessed = False # checker for right answer
     guessed_letters = []
     guessed_words = []
     tries = 6
-    print("Let's play Hangman!")
-    print(display_hangman(tries))
-    print(word_completion + "\n")
+    
+    print("Let's play Hangman!")  # prints start game text
+    print(display_hangman(tries)) # Prints the hangman status 6
 
-    while not guessed and tries > 0:
-        guess = input("Please guess a letter or word: ").upper()
+    while not right_guessed and tries > 0:
+        guess = input("Please guess a letter or word: ").upper() # Get te user input and make it capital letter/word
+
+        if len(guess) == len(word) and guess.isalpha():
+            if guess != word:
+                print(guess, "is not the word.")
+                tries -= 1
+                guessed_words.append(guess)
+                continue
+            
+            print("You already guessed the word", guess)
+            right_guessed = True
+            word_completion = word
 
         if len(guess) == 1 and guess.isalpha():
             if guess in guessed_letters:
@@ -43,26 +54,18 @@ def play_game(word):
                 word_as_list[index] = guess
             word_completion = "".join(word_as_list)
             if "_" not in word_completion:
-                guessed = True
+                right_guessed = True
 
             attempt(tries, word_completion)
             continue
 
-        if len(guess) == len(word) and guess.isalpha():
-            if guess in guessed_words:
-                print("You already guessed the word", guess)
-            if guess != word:
-                print(guess, "is not the word.")
-                tries -= 1
-                guessed_words.append(guess)
-                continue
-            guessed = True
-            word_completion = word
 
         print("Not a valid guess.")
         attempt(tries, word_completion)
 
-    res(guessed, word)
+    res(right_guessed, word)
+
+
 
 
 def attempt(tried, wordcom):
