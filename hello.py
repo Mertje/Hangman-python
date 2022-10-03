@@ -4,8 +4,8 @@ from hangman import display_hangman
 
 
 def get_word():
+    # Gets random words 
     return random.choice(word_list).upper()
-
 
 def play_game(word):
     print(word)
@@ -38,6 +38,7 @@ def play_game(word):
             word_as_list = list(word_completion)
             indices = [i for i, letter in enumerate(
                 word) if letter == guess]
+            
             for index in indices:
                 word_as_list[index] = guess
             word_completion = "".join(word_as_list)

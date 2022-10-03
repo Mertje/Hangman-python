@@ -1,3 +1,4 @@
+# Words list got it from the internet
 word_list = [
     'wares',
     'soup',
