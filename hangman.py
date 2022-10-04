@@ -1,3 +1,4 @@
+# Hangman Template got it from the internet
 def display_hangman(tries):
     stages = [  # final state: head, torso, both arms, and both legs
                 """
